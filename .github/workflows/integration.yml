@@ -26,6 +26,11 @@ jobs:
         run: |
           cd logger/
           go test -v
+      - if: ${{success()}}
+        name: Go into quotation directory and run test
+        run: |
+          cd ../quotation/
+          go test -v
       - if: ${{failure()}}
         name: Creating issues if failed
         uses: nashmaniac/create-issue-action@v1.1
