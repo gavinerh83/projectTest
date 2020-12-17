@@ -2,7 +2,7 @@ name: Project live
 on: [push]
 jobs:
   run-shell-command:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-16.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -28,6 +28,7 @@ jobs:
       - if: ${{success()}}
         name: Test using Testify
         run: |
+          go test -v
           go test -v | go2xunit -output report.xml
       - if: ${{failure()}}
         name: Creating issues if failed
