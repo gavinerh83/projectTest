@@ -26,11 +26,6 @@ jobs:
         run: |
           go get github.com/stretchr/testify
       - if: ${{success()}}
-        name: Enter into database folder to test and list files
-        run:  |
-          cd database/logger/
-          ls -a
-      - if: ${{success()}}
         name: Test using Testify
         run: |
           go test -v 
