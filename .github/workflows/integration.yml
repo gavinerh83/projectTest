@@ -22,8 +22,9 @@ jobs:
         run: |
           go get github.com/stretchr/testify
       - if: ${{success()}}
-        name: Test using Testify
+        name: Go into logger directory and run test
         run: |
+          cd logger/
           go test -v
       - if: ${{failure()}}
         name: Creating issues if failed
