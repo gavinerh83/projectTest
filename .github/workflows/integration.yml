@@ -15,11 +15,7 @@ jobs:
       - name: List files
         run:  |
           ls -a
-      - name: Install dependencies
-        id: InstallDependencies
-        run: |
-          go get github.com/tebeka/go2xunit
-      - if: ${{success()}}
+      - name: Getting dependencies
         run: |
           go get github.com/DATA-DOG/go-sqlmock
       - if: ${{success()}}
@@ -29,14 +25,12 @@ jobs:
         name: Test using Testify
         run: |
           go test -v
-          go test -v | go2xunit -output report.xml
       - if: ${{failure()}}
         name: Creating issues if failed
         uses: nashmaniac/create-issue-action@v1.1
         with:
           title: Build Failed
-          #token: ${{secrets.GITHUB_TOKEN}}
-          token: ${{secrets.TOKEN_SECRET}}
+          token: ${{secrets.GITHUB_TOKEN}}
           assignees: ${{github.actor}}
           labels: worflow-failed
           body: Workflow failed for commit ${{github.sha}}
@@ -45,4 +39,4 @@ jobs:
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          files: report.xml
+          files: test-results/**/*.xml
