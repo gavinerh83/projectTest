@@ -29,7 +29,8 @@ jobs:
       - if: ${{success()}}
         name: Go into quotation directory and run test
         run: |
-          cd ../quotation/
+          cd ..
+          cd quotation/
           go test -v
       - if: ${{failure()}}
         name: Creating issues if failed
