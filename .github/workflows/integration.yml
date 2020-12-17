@@ -24,14 +24,14 @@ jobs:
       - if: ${{success()}}
         name: Go into logger directory and run test
         run: |
+          ls -a
           cd logger/
+          ls -a
           go test -v
       - if: ${{success()}}
         name: Go into quotation directory and run test
         run: |
-          cd ..
-          cd quotation/
-          go test -v
+          ls -a
       - if: ${{failure()}}
         name: Creating issues if failed
         uses: nashmaniac/create-issue-action@v1.1
